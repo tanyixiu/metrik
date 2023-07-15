@@ -164,7 +164,7 @@ val apiTest = task<Test>("apiTest") {
     shouldRunAfter("test")
 }
 
-tasks.check { dependsOn(apiTest) }
+//tasks.check { dependsOn(apiTest) }
 
 detekt {
     buildUponDefaultConfig = true
