@@ -5,7 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
-import metrik.project.domain.service.bamboo.*
+import metrik.project.domain.service.bamboo.BuildDetailDTO
+import metrik.project.domain.service.bamboo.BuildSummaryDTO
+import metrik.project.domain.service.bamboo.DeployProjectDTO
+import metrik.project.domain.service.bamboo.DeploymentResultsDTO
+import metrik.project.domain.service.bamboo.DeploymentVersionBuildResultDTO
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -21,7 +25,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import java.net.URI
 
 @ExtendWith(MockServerExtension::class)
-//@SpringBootTest
+@SpringBootTest
 internal class BambooFeignClientTest(
     @Autowired
     private val bambooFeignClient: BambooFeignClient
@@ -30,7 +34,7 @@ internal class BambooFeignClientTest(
     private lateinit var mockServer: ClientAndServer
     private lateinit var objectMapper: ObjectMapper
 
-//    @BeforeEach
+    @BeforeEach
     fun setUp() {
         objectMapper = ObjectMapper().registerModule(KotlinModule())
         objectMapper.registerModule(JavaTimeModule())
@@ -38,7 +42,7 @@ internal class BambooFeignClientTest(
         mockServer = startClientAndServer(8787)
     }
 
-//    @Test
+    @Test
     fun `should add Bearer token to request while verifying`() {
         mockServer.`when`(
             request()
@@ -54,7 +58,7 @@ internal class BambooFeignClientTest(
         bambooFeignClient.verify(URI("http://localhost:8787/test/build"), "TestToken")
     }
 
-//    @Test
+    @Test
     fun `should add Bearer token and serialize right while querying for build summary`() {
         val expectBuildSummaryDTO: BuildSummaryDTO =
             objectMapper.readValue(javaClass.getResource("/pipeline/bamboo/raw-build-summary-1.json")!!.readText())
@@ -77,7 +81,7 @@ internal class BambooFeignClientTest(
         )
     }
 
-//    @Test
+    @Test
     fun `should add Bearer token and serialize right while querying for build details`() {
         val expectBuildDetailsDTO: BuildDetailDTO =
             objectMapper.readValue(javaClass.getResource("/pipeline/bamboo/raw-build-details-1.json")!!.readText())
@@ -101,7 +105,7 @@ internal class BambooFeignClientTest(
         )
     }
 
-    //    @Test
+    @Test
     fun `should get plan key while querying for deploy project`() {
         val expectDeployProjectSummaryDTO: DeployProjectDTO =
             objectMapper.readValue(
@@ -133,7 +137,7 @@ internal class BambooFeignClientTest(
         )
     }
 
-//    @Test
+    @Test
     fun `should get deploy results and serialize right`() {
         val expectedDeploymentResultsDTO: DeploymentResultsDTO =
             objectMapper.readValue(
@@ -161,7 +165,7 @@ internal class BambooFeignClientTest(
         )
     }
 
-//    @Test
+    @Test
     fun `should return deploy version and serialize right`() {
         val expectedDeploymentVersionBuildResultDTO: DeploymentVersionBuildResultDTO =
             objectMapper.readValue(
@@ -189,7 +193,7 @@ internal class BambooFeignClientTest(
         )
     }
 
-//    @AfterEach
+    @AfterEach
     fun tearDown() {
         mockServer.close()
     }
