@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  service_metric:
+    image: tanyixiu/my-metrik
+    container_name: container_my_metrik
+    restart: always
+    ports:
+      - "9261:80"
+    volumes:
+      - metrik_db_data:/data/db
+      - metrik_app_log:/app/logs
+
+volumes:
+  metrik_db_data:
+  metrik_app_log:
