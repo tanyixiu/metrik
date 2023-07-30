@@ -3,3 +3,6 @@ spring:
   profiles:
     active: local
 
+feign:
+  httpclient:
+    disable-ssl-validation: true

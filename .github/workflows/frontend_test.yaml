@@ -3,7 +3,7 @@ name: Frontend test
 on:
   push:
     branches:
-      - main
+      - my-metrik-master
     paths:
       - frontend/**
       - .github/actions/frontend_test/**
@@ -11,7 +11,7 @@ on:
 
   pull_request:
     branches:
-      - main
+      - my-metrik-master
     paths:
       - frontend/**
       - .github/actions/frontend_test/**

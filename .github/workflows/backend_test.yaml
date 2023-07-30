@@ -3,7 +3,7 @@ name: Backend test
 on:
   push:
     branches:
-      - main
+      - my-metrik-master
     paths:
       - backend/**
       - .github/actions/backend_test/**
@@ -11,7 +11,7 @@ on:
 
   pull_request:
     branches:
-      - main
+      - my-metrik-master
     paths:
       - backend/**
       - .github/actions/backend_test/**
