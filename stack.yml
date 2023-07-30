@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   service_metric:
-    image: tanyixiu/my-metrik
+    image: tanyixiu/my-metrik:2023-07-30-v23
     container_name: container_my_metrik
     restart: always
     ports:
